@@ -19,23 +19,23 @@ def app(request):
 def test_test_add_group(app):
         #test method
         #wd = self.wd
-        app.open_home_page()
-        app.login(username = "admin", password = "secret")
+        #app.open_home_page()
+        app.session.login(username = "admin", password = "secret")
         app.open_groups_page()
         app.create_group(Group("Test", "TestTest", "TestTestTest" ))
         app.retrun_to_groups_page()
-        app.logout()
+        app.session.logout()
         #self.assertTrue(success)
 
 def test_add_empty_group(app):
     #test method
     #wd = self.wd
-    app.open_home_page()
-    app.login(username = "admin", password = "secret")
+    #app.open_home_page()
+    app.session.login(username = "admin", password = "secret")
     app.open_groups_page()
     app.create_group(Group("", "", "" ))
     app.retrun_to_groups_page()
-    app.logout()
+    app.session.logout()
 
 
 if __name__ == '__main__':
