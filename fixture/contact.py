@@ -89,3 +89,12 @@ class ContactHelper:
         wd.find_element_by_name("phone2").clear()
         wd.find_element_by_name("phone2").send_keys(contact.home)
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+
+    def delete_first_contact(self):
+        # open group page
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        wd.find_element_by_name("selected[]").click()
+        #wd.find_element_by_value("Delete").click()
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        wd.switch_to_alert().accept()
