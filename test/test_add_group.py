@@ -21,9 +21,9 @@ def test_test_add_group(app):
         #wd = self.wd
         #app.open_home_page()
         app.session.login(username = "admin", password = "secret")
-        app.open_groups_page()
-        app.create_group(Group("Test", "TestTest", "TestTestTest" ))
-        app.retrun_to_groups_page()
+        app.group.open_groups_page()
+        app.group.create(Group("Test", "TestTest", "TestTestTest"))
+        app.group.retrun_to_groups_page()
         app.session.logout()
         #self.assertTrue(success)
 
@@ -32,9 +32,9 @@ def test_add_empty_group(app):
     #wd = self.wd
     #app.open_home_page()
     app.session.login(username = "admin", password = "secret")
-    app.open_groups_page()
-    app.create_group(Group("", "", "" ))
-    app.retrun_to_groups_page()
+    app.group.open_groups_page()
+    app.group.create(Group("", "", ""))
+    app.group.retrun_to_groups_page()
     app.session.logout()
 
 
