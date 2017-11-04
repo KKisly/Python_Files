@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.common.action_chains import ActionChains
-import time, unittest
-from contact import Contact
-from application import Application
+import unittest
+
 import pytest
+
+from fixture.application import Application
+from model.contact import Contact
 
 
 @pytest.fixture
