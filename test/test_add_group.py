@@ -16,7 +16,7 @@ def test_test_add_group(app):
         app.group.open_groups_page()
         app.group.create(Group("Test", "TestTest", "TestTestTest"))
         app.group.retrun_to_groups_page()
-        #app.session.logout()
+        #app.session.logout() #testing unexpected logout
         #self.assertTrue(success)
 
 def test_add_empty_group(app):
