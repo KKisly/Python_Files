@@ -1,4 +1,5 @@
-
+from model.contact import Contact
+from selenium.common.exceptions import NoSuchElementException
 class ContactHelper:
 
 
@@ -46,9 +47,6 @@ class ContactHelper:
         wd.find_element_by_name("fax").click()
         wd.find_element_by_name("fax").clear()
         wd.find_element_by_name("fax").send_keys(contact.fax_work)
-        #wd.find_element_by_name("email").click()
-        #wd.find_element_by_name("email").clear()
-        #wd.find_element_by_name("email").send_keys(group.email_1)
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys(contact.email_1)
@@ -99,7 +97,59 @@ class ContactHelper:
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
 
+    def open_contact_page(self):
+        # open contacts page
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+
     def count(self):
         wd = self.app.wd
-        self.open_new_contact_page()
+        self.open_contact_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def modify_first_contact(self, new_contact_data):
+        wd = self.app.wd
+        #wd.find_element_by_link_text("groups").click()
+        #self.select_first_contact()
+        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        self.fill_contact_form(new_contact_data)
+        wd.find_element_by_name("update").click()
+        self.open_contact_page()
+
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
+    def fill_contact_form(self, contact):
+        wd = self.app.wd
+        self.change_field("firstname", contact.name)
+        self.change_field("lastname", contact.last_name)
+        self.change_field("address", contact.address)
+
+    def change_field(self, field_name, text):
+        wd = self.app.wd
+        if text != None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_contact_page()
+        contacts = []
+        for element in wd.find_elements_by_css_selector("td.center"):
+            test = self.if_element_present(element)
+            if test == True:
+                name = element.find_element_by_name("selected[]").get_attribute("title")
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                lastname = element.find_element_by_name("selected[]").get_attribute("alt")
+                contacts.append(Contact(name=name, last_name = lastname, id = id))
+        return contacts
+
+    def if_element_present(self, element):
+        wd = self.app.wd
+        try:
+            element.find_element_by_name("selected[]")
+        except NoSuchElementException:
+            return False
+        return True

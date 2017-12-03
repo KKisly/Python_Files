@@ -1,10 +1,11 @@
 #helper class for add contact page
+from sys import maxsize
 
 class Contact:
 
-    def __init__(self, name, middle_name, last_name, nickname, title, company, address, telephone_home, telephone_mobile,
-                 telephone_work, fax_work, email_1, email_2, email_3, homepage, birthday_option_1, birthday_option_2,
-                 birthday_year, anniversary_option_1, anniversary_option_2, anniversary_year, secondary_address, home, notes):
+    def __init__(self, name=None, middle_name=None, last_name=None, nickname=None, title=None, company=None, address=None, telephone_home=None, telephone_mobile=None,
+                 telephone_work=None, fax_work=None, email_1=None, email_2=None, email_3=None, homepage=None, birthday_option_1=None, birthday_option_2=None,
+                 birthday_year=None, anniversary_option_1=None, anniversary_option_2=None, anniversary_year=None, secondary_address=None, home=None, notes=None, id=None):
 
         self.name = name
         self.middle_name = middle_name
@@ -30,3 +31,18 @@ class Contact:
         self.secondary_address = secondary_address
         self.home = home
         self.notes = notes
+        self.id = id
+
+
+    def __repr__(self):
+        return "%s:%s" % (self.id, self.name)
+
+    def __eq__(self, other):
+        return ((self.id is None or other.id is None or self.id  == other.id) or self.name == other.name or self.last_name == other.last_name, self.address == other.address)
+
+    def id_or_max(self):
+        if self.id:
+            return int(self.id)
+        else:
+            return maxsize
+
