@@ -8,10 +8,7 @@ from model.contact import Contact
 
 
 def test_test_add_contact(app):
-    #test
-    #wd = self.wd
-    #app.open_home_page()
-    #app.session.login("admin", "secret")
+
     old_contacts = app.contact.get_contact_list()
     app.contact.open_new_contact_page()
     contact = Contact(name="test", middle_name="test", last_name="test", nickname="test", title="test", company="test", address="test", telephone_home="test", telephone_mobile="test",

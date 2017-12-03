@@ -1,3 +1,4 @@
+from selenium.webdriver.firefox.webdriver import WebDriver
 from model.contact import Contact
 from selenium.common.exceptions import NoSuchElementException
 class ContactHelper:
@@ -90,14 +91,23 @@ class ContactHelper:
         self.contact_cache = None
 
     def delete_first_contact(self):
-        # open group page
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_element_by_link_text("home").click()
-        wd.find_element_by_name("selected[]").click()
-        #wd.find_element_by_value("Delete").click()
+        self.select_contact_by_index(index)
+        # wd.find_element_by_value("Delete").click()
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
+        wd.implicitly_wait(4)
+        self.open_contact_page()
         self.contact_cache = None
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
 
     def open_contact_page(self):
         # open contacts page
@@ -110,10 +120,13 @@ class ContactHelper:
         return len(wd.find_elements_by_name("selected[]"))
 
     def modify_first_contact(self, new_contact_data):
+        self.modify_contact_by_index(0, new_contact_data)
+
+    def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
-        #wd.find_element_by_link_text("groups").click()
-        #self.select_first_contact()
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        # wd.find_element_by_link_text("groups").click()
+        # self.select_first_contact()
+        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[%s]/td[8]/a/img" % index).click()
         self.fill_contact_form(new_contact_data)
         wd.find_element_by_name("update").click()
         self.open_contact_page()
