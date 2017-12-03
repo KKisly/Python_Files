@@ -87,6 +87,7 @@ class ContactHelper:
         wd.find_element_by_name("phone2").clear()
         wd.find_element_by_name("phone2").send_keys(contact.home)
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.contact_cache = None
 
     def delete_first_contact(self):
         # open group page
@@ -96,6 +97,7 @@ class ContactHelper:
         #wd.find_element_by_value("Delete").click()
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def open_contact_page(self):
         # open contacts page
@@ -115,6 +117,7 @@ class ContactHelper:
         self.fill_contact_form(new_contact_data)
         wd.find_element_by_name("update").click()
         self.open_contact_page()
+        self.contact_cache = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -133,18 +136,22 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_contact_page()
-        contacts = []
-        for element in wd.find_elements_by_css_selector("td.center"):
-            test = self.if_element_present(element)
-            if test == True:
-                name = element.find_element_by_name("selected[]").get_attribute("title")
-                id = element.find_element_by_name("selected[]").get_attribute("value")
-                lastname = element.find_element_by_name("selected[]").get_attribute("alt")
-                contacts.append(Contact(name=name, last_name = lastname, id = id))
-        return contacts
+        if self.contact_cache is None:
+
+            wd = self.app.wd
+            self.open_contact_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_css_selector("td.center"):
+                test = self.if_element_present(element)
+                if test == True:
+                    name = element.find_element_by_name("selected[]").get_attribute("title")
+                    id = element.find_element_by_name("selected[]").get_attribute("value")
+                    lastname = element.find_element_by_name("selected[]").get_attribute("alt")
+                    self.contact_cache.append(Contact(name=name, last_name = lastname, id = id))
+        return list(self.contact_cache)
 
     def if_element_present(self, element):
         wd = self.app.wd
