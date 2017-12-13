@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
-import unittest
-
-import pytest
-
-from fixture.application import Application
+#import unittest
 from model.contact import Contact
-
 
 def test_test_add_contact(app):
 
