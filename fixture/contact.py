@@ -48,7 +48,7 @@ class ContactHelper:
         wd.find_element_by_name("work").send_keys(contact.telephone_work)
         wd.find_element_by_name("fax").click()
         wd.find_element_by_name("fax").clear()
-        wd.find_element_by_name("fax").send_keys(contact.fax_work)
+        wd.find_element_by_name("fax").send_keys(contact.fax)
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys(contact.email_1)
@@ -61,22 +61,22 @@ class ContactHelper:
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[%s]" % contact.birthday_option_1).is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[%s]" % contact.birthday_option_1).click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[%s]" % contact.birthday_option_2).is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[%s]" % contact.birthday_option_2).click()
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys(contact.birthday_year)
-        wd.find_element_by_name("theform").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[%s]" % contact.anniversary_option_1).is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[%s]" % contact.anniversary_option_1).click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[%s]" % contact.anniversary_option_2).is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[%s]" % contact.anniversary_option_2).click()
-        wd.find_element_by_name("ayear").click()
-        wd.find_element_by_name("ayear").clear()
-        wd.find_element_by_name("ayear").send_keys(contact.anniversary_year)
-        wd.find_element_by_name("theform").click()
+        # if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[%s]" % contact.birthday_option_1).is_selected():
+        #     wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[%s]" % contact.birthday_option_1).click()
+        # if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[%s]" % contact.birthday_option_2).is_selected():
+        #     wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[%s]" % contact.birthday_option_2).click()
+        # wd.find_element_by_name("byear").click()
+        # wd.find_element_by_name("byear").clear()
+        # wd.find_element_by_name("byear").send_keys(contact.birthday_year)
+        # wd.find_element_by_name("theform").click()
+        # if not wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[%s]" % contact.anniversary_option_1).is_selected():
+        #     wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[%s]" % contact.anniversary_option_1).click()
+        # if not wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[%s]" % contact.anniversary_option_2).is_selected():
+        #     wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[%s]" % contact.anniversary_option_2).click()
+        # wd.find_element_by_name("ayear").click()
+        # wd.find_element_by_name("ayear").clear()
+        # wd.find_element_by_name("ayear").send_keys(contact.anniversary_year)
+        # wd.find_element_by_name("theform").click()
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
         wd.find_element_by_name("address2").send_keys(contact.secondary_address)

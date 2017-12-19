@@ -4,8 +4,7 @@ from sys import maxsize
 class Contact:
 
     def __init__(self, name=None, middle_name=None, last_name=None, nickname=None, title=None, company=None, address=None, telephone_home=None, telephone_mobile=None,
-                 telephone_work=None, fax=None, email_1=None, email_2=None, email_3=None, homepage=None, birthday_option_1=None, birthday_option_2=None,
-                 birthday_year=None, anniversary_option_1=None, anniversary_option_2=None, anniversary_year=None, secondary_address=None, home=None, notes=None, id=None,
+                 telephone_work=None, fax=None, email_1=None, email_2=None, email_3=None, homepage=None, secondary_address=None, home=None, notes=None, id=None,
                  all_telephones_from_home_page=None, all_emails_from_home_page=None):
 
         self.name = name
@@ -23,12 +22,12 @@ class Contact:
         self.email_2 = email_2
         self.email_3 = email_3
         self.homepage = homepage
-        self.birthday_option_1 = birthday_option_1
-        self.birthday_option_2 = birthday_option_2
-        self.birthday_year = birthday_year
-        self.anniversary_option_1 = anniversary_option_1
-        self.anniversary_option_2 = anniversary_option_2
-        self.anniversary_year = anniversary_year
+        # self.birthday_option_1 = birthday_option_1
+        # self.birthday_option_2 = birthday_option_2
+        # self.birthday_year = birthday_year
+        # self.anniversary_option_1 = anniversary_option_1
+        # self.anniversary_option_2 = anniversary_option_2
+        # self.anniversary_year = anniversary_year
         self.secondary_address = secondary_address
         self.home = home
         self.notes = notes
@@ -38,7 +37,7 @@ class Contact:
 
 
     def __repr__(self):
-        return "%s:%s" % (self.id, self.name)
+        return "%s:%s%s:%s:%s" % (self.id, self.name, self.last_name, self.address, self.email_1)
 
     def __eq__(self, other):
         return ((self.id is None or other.id is None or self.id  == other.id) or self.name == other.name or self.last_name == other.last_name, self.address == other.address)
